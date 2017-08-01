@@ -13,10 +13,10 @@ int main(int argc, char const *argv[])
 	for (i = 0; i < 5; ++i)
 	{
 		LIStable[i] = 1;
-		contribute[i] = -1;
+		contribute[i] = i;
 	}
 
-	// finding LIS when LIS(i) implies LIS starting at A[1] and ending at A[i]
+	// finding LIS when LIS(i) implies LIS starting at A[0] and ending at A[i]
 	// equation : LIS(i) = Max(j<i && A[j]<A[i]){LIS(j)} + 1
 	for (i = 0; i < 5; ++i)
 	{
@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 			if (arr[j] < arr[i] && LIStable[i] < LIStable[j] + 1)
 			{
 				LIStable[i] = LIStable[j] + 1;
-				contribute[i] = j;
+				contribute[i] = j; // track last contributor for printing purpose
 			}
 		}
 
@@ -59,10 +59,13 @@ int main(int argc, char const *argv[])
 	printf("Max Length: %d\n", max);
 	printf("Max pos: %d\n", maxpos);
 
-	for (i = 0; i < maxpos; ++i)
+	// 7's contributor 5 and 5's contributor 4(always track last contributor then its contributor and so on)
+	while(contribute[maxpos] != maxpos)
 	{
-		
+		printf("%d ",arr[maxpos]);
+		maxpos = contribute[maxpos];
 	}
+	printf("%d\n",arr[maxpos]);
 
 	return 0;
 }
