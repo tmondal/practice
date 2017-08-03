@@ -46,7 +46,7 @@ void push(struct stack **headtostack,struct binarytreenode *treenode){
 	struct stack *newnode = (struct stack *)malloc(sizeof(struct stack));
 	if (newnode == NULL)
 	{
-		printf("Error!\n");
+		printf("Error!!\n");
 		getchar();
 		exit(0);
 	}
